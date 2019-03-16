@@ -1,4 +1,6 @@
-package com.example.beerapplication;
+package com.example.beerapplication.Beerstuff;
+
+import com.example.beerapplication.Beerstuff.Beer;
 
 import java.util.List;
 

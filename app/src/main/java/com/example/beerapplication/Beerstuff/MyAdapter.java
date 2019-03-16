@@ -1,6 +1,5 @@
-package com.example.beerapplication;
+package com.example.beerapplication.Beerstuff;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
@@ -8,29 +7,49 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.beerapplication.R;
+
+import org.w3c.dom.Text;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<String> values;
+    private List<Beer> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
+        public ImageView img_url;
+        public TextView name;
+        public TextView tagline;
+        //public TextView description;
+        //public TextView ph;
+        //public TextView volume;
+
         public TextView txtHeader;
         public TextView txtFooter;
         public View layout;
+
+
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
+            img_url = itemView.findViewById(R.id.image_view_img_url);
+            name = itemView.findViewById(R.id.text_view_name);
+            tagline = itemView.findViewById(R.id.text_view_tagline);
+            //description = itemView.findViewById(R.id.text_view_description);
+            //ph = itemView.findViewById(R.id.text_view_ph);
+            //volume = itemView.findViewById(R.id.text_view_volume);
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, Beer item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -41,7 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<String> myDataset) {
+    public MyAdapter(List<Beer> myDataset) {
         values = myDataset;
     }
 
@@ -64,16 +83,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position);
-        holder.txtHeader.setText(name);
+        //Beer obj_beer = values.get
+        final Beer currentBeer = values.get(position);
+        holder.txtHeader.setText(currentBeer.getName());
+       // holder.txtFooter.setText(currentBeer.getName());
+
+        holder.txtFooter.setText(currentBeer.getName());
         holder.txtHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 remove(position);
             }
+
         });
 
-        holder.txtFooter.setText("Footer: " + name);
+        //holder.txtFooter.setText("Footer: " + name);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
