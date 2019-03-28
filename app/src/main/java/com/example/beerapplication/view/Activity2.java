@@ -1,15 +1,21 @@
 package com.example.beerapplication.view;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.beerapplication.Beerstuff.Beer;
 import com.example.beerapplication.Beerstuff.JsonPlaceHolderApi;
 import com.example.beerapplication.Beerstuff.MyAdapter;
 import com.example.beerapplication.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +32,7 @@ public class Activity2 extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private TextView textViewResult;
+    int cacheSize = 10 * 1024 *1024;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,33 @@ public class Activity2 extends AppCompatActivity {
             }
         });
 
+        //DONNEÉE DANS CACHE
+
+        sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
+
+            sharedPreferences
+                    .edit()
+                    .putInt(PREFS_AGE, 24)
+                    .putString(PREFS_NAME, "beers")
+                    .apply();
+
+    }
+
+       public void startThird(Beer currentBeer) {
+
+        final Intent Intent3 = new Intent(this, DetailActivity.class);
+
+        Gson gson = new Gson();
+        String JsoncurrentBeer = gson.toJson(currentBeer);
+
+        Intent3.putExtra("key",JsoncurrentBeer);
+
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(Intent3);
+            }
+        });
+        startActivity(Intent3);
     }
 
 
@@ -74,5 +108,13 @@ public class Activity2 extends AppCompatActivity {
         mAdapter = new MyAdapter(beerList);//définit mon adapteur
         recyclerView.setAdapter(mAdapter);
     }
+
+    private static final String PREFS = "PREFS";
+    private static final String PREFS_AGE = "PREFS_AGE";
+    private static final String PREFS_NAME = "PREFS_NAME";
+    SharedPreferences sharedPreferences;
+
+
+
 
 }

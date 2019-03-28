@@ -3,4 +3,7 @@
     <string name="activity_1">Activity 1</string>
     <string name="activity_2">Activity 2</string>
     <string name="name_button">Enter</string>
+    <string name="todo">td</string>
+    <string name="detail_description">d_des</string>
+    <string name="name">n</string>
 </resources>

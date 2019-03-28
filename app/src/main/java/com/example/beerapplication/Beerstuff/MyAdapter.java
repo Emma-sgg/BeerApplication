@@ -12,9 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.beerapplication.R;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Beer> values;
@@ -37,10 +34,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
-            //ImageView txtSider = v.findViewById(R.id.icon);
-
-            //icon = itemView.findViewById(R.id.icon);
-            //name = itemView.findViewById(R.id.text_view_name);
 
         }
     }
