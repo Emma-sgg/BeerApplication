@@ -47,22 +47,12 @@ public class Activity2 extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<Beer> beers = response.body();
                     showList(beers);
-
                 }
                 else{
                     textViewResult.setText("Code" + response.code());
                     return;
-
                 }
                 List<Beer> beers = response.body();
-                /*for (Beer beer : beers) {
-                    String content = "";
-                    content += "TAGLINE: " + beer.getTagline() + "\n";
-                    content += "DESCRIPTION: " + beer.getDescription() + "\n";
-                    content += "PH: " + beer.getPh() + "\n";
-                    content += "VOLUME: " + beer.getVolume() + "\n\n";
-                    textViewResult.append(content);
-                }*/
             }
 
             @Override
@@ -79,11 +69,9 @@ public class Activity2 extends AppCompatActivity {
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        /*for (int i = 0; i < 100; i++) {
-            input.add("Test" + i);
-        }// define an adapter*/
 
-        mAdapter = new MyAdapter(beerList);
+
+        mAdapter = new MyAdapter(beerList);//définit mon adapteur
         recyclerView.setAdapter(mAdapter);
     }
 

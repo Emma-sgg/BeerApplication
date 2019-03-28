@@ -1,5 +1,6 @@
 package com.example.beerapplication.Beerstuff;
 
+import java.text.BreakIterator;
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
@@ -11,28 +12,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.beerapplication.R;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Beer> values;
-
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public ImageView img_url;
+        public ImageView image_url;
         public TextView name;
-        public TextView tagline;
-        //public TextView description;
-        //public TextView ph;
-        //public TextView volume;
 
         public TextView txtHeader;
         public TextView txtFooter;
         public View layout;
-
+        public ImageView txtSider;
 
 
         public ViewHolder(View v) {
@@ -40,12 +37,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
-            img_url = itemView.findViewById(R.id.image_view_img_url);
-            name = itemView.findViewById(R.id.text_view_name);
-            tagline = itemView.findViewById(R.id.text_view_tagline);
-            //description = itemView.findViewById(R.id.text_view_description);
-            //ph = itemView.findViewById(R.id.text_view_ph);
-            //volume = itemView.findViewById(R.id.text_view_volume);
+            //ImageView txtSider = v.findViewById(R.id.icon);
+
+            //icon = itemView.findViewById(R.id.icon);
+            //name = itemView.findViewById(R.id.text_view_name);
+
         }
     }
 
@@ -66,13 +62,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        LayoutInflater inflater = LayoutInflater.from(
-                parent.getContext());
-        View v =
-                inflater.inflate(R.layout.row_layout, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View v =  inflater.inflate(R.layout.row_layout, parent, false); //le fichier xml
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -83,10 +76,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        //Beer obj_beer = values.get
+
         final Beer currentBeer = values.get(position);
+        String image_url = currentBeer.getImage_url();
         holder.txtHeader.setText(currentBeer.getName());
-       // holder.txtFooter.setText(currentBeer.getName());
+
 
         holder.txtFooter.setText(currentBeer.getName());
         holder.txtHeader.setOnClickListener(new OnClickListener() {
@@ -94,17 +88,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onClick(View v) {
                 remove(position);
             }
-
         });
 
-        //holder.txtFooter.setText("Footer: " + name);
-
     }
-
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return values.size();
     }
-
 }
